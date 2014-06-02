@@ -14,7 +14,8 @@ class AuthController {
 		//Login logic
 		Sql sql = new Sql(dataSource)
 
-		String query = "SELECT * FROM account_holder where username = '$username' and password = '$password'"
+        // Groovy SQL supports GString escaping
+		def query = "SELECT * FROM account_holder where username = $username and password = $password"
 		println "Query = $query"
 
 		GroovyRowResult row = sql.firstRow(query)
