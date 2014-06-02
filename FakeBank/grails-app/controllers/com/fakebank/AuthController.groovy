@@ -2,6 +2,7 @@ package com.fakebank
 
 import groovy.sql.GroovyRowResult
 import groovy.sql.Sql
+import com.fakebank.*
 
 class AuthController {
 	def dataSource
@@ -12,13 +13,10 @@ class AuthController {
 
 	def authenticate(String username, String password) {
 		//Login logic
-		Sql sql = new Sql(dataSource)
 
-		String query = "SELECT * FROM account_holder where username = :username and password = :password"
-		println "Query = $query"
+                def row = AccountHolder.find("from AccountHolder as ah where ah.username=? and ah.password=?", [username, password])
 
-		GroovyRowResult row = sql.firstRow(query, [username:username, password:password])
-		println row
+                println row
 
 		if (row) {
 			flash.message = "Successful login"
