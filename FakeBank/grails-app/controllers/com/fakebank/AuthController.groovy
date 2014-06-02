@@ -1,7 +1,5 @@
 package com.fakebank
 
-import groovy.sql.GroovyRowResult
-import groovy.sql.Sql
 
 class AuthController {
 	def dataSource
