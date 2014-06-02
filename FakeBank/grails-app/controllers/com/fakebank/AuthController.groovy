@@ -1,8 +1,11 @@
 package com.fakebank
 
+<<<<<<< HEAD
 import groovy.sql.GroovyRowResult
 import groovy.sql.Sql
 import com.fakebank.*
+=======
+>>>>>>> upstream/master
 
 class AuthController {
 	def dataSource
@@ -12,11 +15,18 @@ class AuthController {
 	}
 
 	def authenticate(String username, String password) {
+<<<<<<< HEAD
 		//Login logic
 
                 def row = AccountHolder.find("from AccountHolder as ah where ah.username=? and ah.password=?", [username, password])
 
                 println row
+=======
+
+
+		String hql = "from AccountHolder where username = '$username' and password = '$password'"
+		def row = AccountTransaction.executeQuery(hql)
+>>>>>>> upstream/master
 
 		if (row) {
 			flash.message = "Successful login"
