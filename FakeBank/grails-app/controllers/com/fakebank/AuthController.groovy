@@ -9,14 +9,11 @@ class AuthController {
 	}
 
 	def authenticate(String username, String password) {
+        def ah = AccountHolder.find('from AccountHolder h where h.username = ? and h.password = ?', [username, password])
 
-
-		String hql = "from AccountHolder where username = '$username' and password = '$password'"
-		def row = AccountTransaction.executeQuery(hql)
-
-		if (row) {
+		if (ah) {
 			flash.message = "Successful login"
-			session.userId = row.id
+			session.userId = ah.id
 			redirect(mapping: 'home')
 		} else {
 			flash.message = "Failed login"
