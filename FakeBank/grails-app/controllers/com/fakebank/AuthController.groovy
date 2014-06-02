@@ -11,18 +11,11 @@ class AuthController {
 	}
 
 	def authenticate(String username, String password) {
-		//Login logic
-		Sql sql = new Sql(dataSource)
+        def ah = AccountHolder.find('from AccountHolder h where h.username = ? and h.password = ?', [username, password])
 
-		String query = "SELECT * FROM account_holder where username = '$username' and password = '$password'"
-		println "Query = $query"
-
-		GroovyRowResult row = sql.firstRow(query)
-		println row
-
-		if (row) {
+		if (ah) {
 			flash.message = "Successful login"
-			session.userId = row.id
+			session.userId = ah.id
 			redirect(mapping: 'home')
 		} else {
 			flash.message = "Failed login"
