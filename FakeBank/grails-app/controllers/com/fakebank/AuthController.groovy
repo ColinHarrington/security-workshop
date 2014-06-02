@@ -11,14 +11,19 @@ class AuthController {
 	}
 
 	def authenticate(String username, String password) {
+
+
+        String hql = "from AccountHolder where username = '$username' and password = '$password'"
+        def row = AccountTransaction.executeQuery(hql)
+
 		//Login logic
-		Sql sql = new Sql(dataSource)
+		/*Sql sql = new Sql(dataSource)
 
 		String query = "SELECT * FROM account_holder where username = :username and password = :password"
 		println "Query = $query"
 
 		GroovyRowResult row = sql.firstRow(query, [username: username, password: password])
-		println row
+		println row*/
 
 		if (row) {
 			flash.message = "Successful login"
