@@ -14,10 +14,10 @@ class AuthController {
 		//Login logic
 		Sql sql = new Sql(dataSource)
 
-		String query = "SELECT * FROM account_holder where username = '$username' and password = '$password'"
+		String query = "SELECT * FROM account_holder where username = :username and password = :password"
 		println "Query = $query"
 
-		GroovyRowResult row = sql.firstRow(query)
+		GroovyRowResult row = sql.firstRow(query, [username: username, password: password])
 		println row
 
 		if (row) {
